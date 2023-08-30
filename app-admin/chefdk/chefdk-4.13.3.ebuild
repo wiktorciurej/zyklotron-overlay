@@ -1,8 +1,8 @@
 # Based on chefdk-omnibus from ssnb overlay.
 
-EAPI="7"
+EAPI="8"
 
-inherit eutils unpacker
+inherit unpacker
 
 DESCRIPTION="Chef Development Kit"
 HOMEPAGE="https://github.com/chef/chef-dk"
@@ -29,7 +29,7 @@ src_install() {
 	# link executables
 	binaries="berks chef chef-apply chef-client chef-resource-inspector chef-service-manager chef-shell chef-solo chef-vault chef-windows-service cookstyle dco delivery foodcritic inspec kitchen knife ohai print_execution_environment push-apply pushy-client pushy-service-manager"
 	for binary in $binaries; do
-		dosym "/opt/chefdk/bin/$binary" "/usr/bin/$binary" || die "Cannot link /opt/chefdk/$binary to /usr/bin"
+		dosym -r "/opt/chefdk/bin/$binary" "/usr/bin/$binary" || die "Cannot link /opt/chefdk/$binary to /usr/bin"
 	done
 }
 
